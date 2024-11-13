@@ -7,7 +7,7 @@ import {
 } from "@/components";
 function GetHourlyWidget() {
     return (
-        <Card className="flex-1 h-full max-w-[calc(50%-48px)]">
+        <Card className="flex-1 h-full max-w-[calc(50%-40px)]">
             <CardHeader>
                 <CardTitle className="text-xl">Hourly</CardTitle>
                 <CardDescription>
