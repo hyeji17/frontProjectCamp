@@ -1,7 +1,10 @@
 import { Map } from "react-kakao-maps-sdk";
 import { Card } from "@/components";
+import useKakaoLoader from "@/hooks/useKakaoLoader";
 
 function GetKakaoMapWidget() {
+    useKakaoLoader();
+
     return (
         <Card className="w-1/4 min-w-[25%] h-full">
             {/* 지도를 표시할 컨테이너 */}

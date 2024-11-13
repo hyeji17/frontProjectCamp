@@ -9,7 +9,7 @@ function Header() {
                     {/* 아이콘 */}
                     <img src="src/assets/icons/logo.svg" alt="logo" className="h-10" />
                     {/* 폰트 로고 */}
-                    <h3 className="poppins-bold scroll-m-20 text-2xl font-semibold tracking-tight text-white">
+                    <h3 className="poppins-bold scroll-m-20 text-2xl font-semibold tracking-tight">
                         Weather.io
                     </h3>
                 </div>
