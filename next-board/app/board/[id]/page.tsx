@@ -58,7 +58,6 @@ function BoardPage() {
                     </div>
                 </div>
                 <div className={styles.body}>
-                    {" "}
                     <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
                         There is no board yet.
                     </h3>
@@ -68,6 +67,7 @@ function BoardPage() {
                     <CirclePlus className="text-[#E79057] stroke-1" />
                 </div>
             </main>
+            <div></div>
         </div>
     );
 }
