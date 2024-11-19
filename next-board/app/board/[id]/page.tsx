@@ -1,6 +1,15 @@
-import { Button, SearchBar, Progress, LabelDatePicker } from "@/components/ui";
+"use-client";
+
+import {
+    Button,
+    SearchBar,
+    Progress,
+    LabelDatePicker,
+} from "@/components/ui";
 import styles from "./page.module.scss";
-import { CirclePlus } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
+import { CardBoard } from "@/features";
+// import { CirclePlus } from "lucide-react";
 
 function BoardPage() {
     return (
@@ -31,6 +40,12 @@ function BoardPage() {
             </aside>
             <main className="page__main">
                 <div className={styles.header}>
+                    <div className={styles[`header__btn-box`]}>
+                        <Button variant={"outline"} size={"icon"}>
+                            <ChevronLeft />
+                        </Button>
+                        <Button variant={"secondary"}>저장</Button>
+                    </div>
                     <div className={styles.header__top}>
                         {/* 제목 입력 Input 섹션 */}
                         <input
@@ -58,14 +73,23 @@ function BoardPage() {
                     </div>
                 </div>
                 <div className={styles.body}>
-                    {" "}
-                    <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                        There is no board yet.
-                    </h3>
-                    <small className="text-sm font-normal leading-none">
-                        Click the button and start flashing!
-                    </small>
-                    <CirclePlus className="text-[#E79057] stroke-1" />
+                    {/* Add Mew Board 버튼 클릭으로 인한 Board 데이터가 없을 경우 */}
+                    {/* <div className={styles.body__noData}>
+                        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">There is no board yet.</h3>
+                        <small className="text-sm font-medium leading-none text-[#6D6D6D] mt-3 mb-7">
+                            Click the button and start flashing!
+                        </small>
+                        <button>
+                            <CirclePlus className="text-[#E79057] stroke-1" />
+                        </button>
+                    </div> */}
+
+                    {/* Add Mew Board 버튼 클릭으로 인한 Board 데이터가 생길 경우 */}
+                    <div className={styles.body__isData}>
+                        <CardBoard />
+                        <CardBoard />
+                        <CardBoard />
+                    </div>
                 </div>
             </main>
         </div>
