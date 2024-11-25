@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
+import { Toaster } from "@/shared/ui/toast/toaster";
+import { AsideSection } from "@/widgets";
 import "./styles/globals.css";
 import "./styles/main.scss";
 
@@ -20,7 +22,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body className={NOTO_SANS_KR.className}>{children}</body>
+            <body className={NOTO_SANS_KR.className}>
+                <div className="page">
+                    <AsideSection />
+                    <main className="page__main">{children}</main>
+                </div>
+                <Toaster />
+            </body>
         </html>
     );
 }
