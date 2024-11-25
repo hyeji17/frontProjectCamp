@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { tasksAtom } from "@/stores/atoms";
@@ -15,8 +15,7 @@ function AsideSection() {
     const { id } = useParams();
     const router = useRouter();
     const { toast } = useToast();
-    const { getTasks } = useGetTasks();
-    const [tasks, setTasks] = useAtom(tasksAtom);
+    const { tasks, setTasks, getTasks } = useGetTasks();
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {
@@ -25,28 +24,21 @@ function AsideSection() {
 
     /** Add New Page 버튼을 클릭하였을 때, TODO-LIST 생성 */
     const handleCreateTask = useCreateTask();
+
     /** 검색  */
     const handleSearch = async (
         event: React.KeyboardEvent<HTMLInputElement>
     ) => {
-        if (event.key === "Enter") {
+        if ((event.key = "Enter")) {
             try {
-                const { data, error, status } = await supabase
+                const { data, status, error } = await supabase
                     .from("todos")
                     .select("*")
                     .ilike("title", `%${searchTerm}%`);
-
-                if (data && status === 200) setTasks(data); // Jotai의 tasksAtom 상태 업데이트
-                if (error) {
-                    toast({
-                        variant: "destructive",
-                        title: "에러가 발생했습니다.",
-                        description: `Supabase 오류: ${
-                            error.message || "알 수 없는 오류"
-                        }`,
-                    });
+                if (data && status === 200) {
+                    setTasks(data); // Jotai의 taskAtom 상태를 업데이트
                 }
-            } catch (error) {
+            } catch (err) {
                 /** 네트워크 오류나 예기치 않은 에러를 잡기 위해 catch 구문 사용 */
                 toast({
                     variant: "destructive",
@@ -54,9 +46,9 @@ function AsideSection() {
                     description:
                         "서버와 연결할 수 없습니다. 다시 시도해주세요!",
                 });
-                console.error("API 호출 중 오류 발생:", error);
+                console.error("API 호출 중 오류 발생:", err);
             }
-        } else return;
+        }
     };
 
     return (

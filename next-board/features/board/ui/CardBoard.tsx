@@ -30,13 +30,13 @@ function CardBoard({ board }: Props) {
         <Card className="w-full flex flex-col items-center p-5">
             {/* 게시물 카드 제목 영역*/}
             <div className="w-full flex items-center justify-between mb-4">
-                <div className="flex items-center justify-start gap-2">
+                <div className="w-full flex items-center justify-start gap-2">
                     <Checkbox className="h-5 w-5" checked={board.isCompleted} />
                     <input
                         type="text"
-                        placeholder="제목 없음."
+                        placeholder="등록된 제목이 없습니다."
                         value={board.title}
-                        className="text-xl outline-none bg-transparent"
+                        className="w-full text-xl outline-none bg-transparent"
                     />
                 </div>
                 <Button variant={"ghost"} size={"icon"}>
@@ -77,7 +77,7 @@ function CardBoard({ board }: Props) {
             </div>
             <Separator className="my-3" />
             {/* Add Contents 버튼 영역 */}
-            <MarkdownEditorDialog>
+            <MarkdownEditorDialog board = {board}>
                 <Button
                     variant={"ghost"}
                     className="font-normal text-[#6D6D6D]"
