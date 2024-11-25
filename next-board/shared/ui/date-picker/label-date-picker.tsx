@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import {
@@ -15,18 +14,11 @@ import { Calendar as CalendarIcon } from "lucide-react";
 interface Props {
     label: string;
     isReadOnly?: boolean;
-    propDate: Date | undefined | string;
-    onSetDate: (date: Date | undefined) => void;
+    value: Date | undefined;
+    onChange?: (date: Date | undefined) => void;
 }
 
-function LabelDatePicker({ label, isReadOnly, onSetDate }: Props) {
-    const [date, setDate] = useState<Date | undefined>();
-
-    useEffect(() => {
-        onSetDate(date);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [date]);
-
+function LabelDatePicker({ label, isReadOnly, value, onChange }: Props) {
     return (
         <div className="max-w-64 flex items-center gap-3">
             <small className="text-sm font-medium leading-none text-[#6D6D6D]">
@@ -38,13 +30,13 @@ function LabelDatePicker({ label, isReadOnly, onSetDate }: Props) {
                         variant={"outline"}
                         className={cn(
                             "w-[280px] justify-start text-left font-normal",
-                            !date && "text-muted-foreground"
+                            !value && "text-muted-foreground"
                         )}
                         disabled={isReadOnly} // "readOnly" 모드일 때 버튼 비활성화
                     >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date ? (
-                            format(date, "PPP")
+                        {value ? (
+                            format(value, "PPP")
                         ) : (
                             <span>날짜를 선택하세요.</span>
                         )}
@@ -54,8 +46,8 @@ function LabelDatePicker({ label, isReadOnly, onSetDate }: Props) {
                     <PopoverContent className="w-auto p-0">
                         <Calendar
                             mode="single"
-                            selected={date}
-                            onSelect={setDate}
+                            selected={value}
+                            onSelect={onChange}
                             initialFocus
                         />
                     </PopoverContent>

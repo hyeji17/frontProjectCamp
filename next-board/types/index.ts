@@ -1,16 +1,16 @@
 export interface Task {
     id: number;
     title: string;
-    startDate: string | Date;
-    endDate: string | Date;
-    boards: BoardContent[];
+    start_date: Date;
+    end_date: Date;
+    boards: Board[];
 }
 
-export interface BoardContent {
-    boardId: string;
+export interface Board {
+    id: string;
     isCompleted: boolean;
     title: string;
-    startDate: Date | null;
-    endDate: Date | null;
+    startDate: Date | undefined;
+    endDate: Date | undefined;
     content: string;
-  }
+}
