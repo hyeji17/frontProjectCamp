@@ -15,11 +15,20 @@ import {
     Label,
 } from "@/shared/ui";
 import { Eye } from "@/public/assets/icons";
+import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 function SignUpPage() {
     const router = useRouter();
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
-    const handleSignUp = async () => {
+    const handleSignUp = async (email:string, password:string) => {
+        // Sign up with email
+        const { user, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
     };
 
     return (
@@ -58,6 +67,7 @@ function SignUpPage() {
                                 id="email"
                                 type="email"
                                 placeholder="이메일을 입력하세요."
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </div>
@@ -68,6 +78,7 @@ function SignUpPage() {
                                 type="password"
                                 placeholder="비밀번호를 입력하세요."
                                 required
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <Button
                                 size={"icon"}
@@ -96,7 +107,10 @@ function SignUpPage() {
                             >
                                 이전
                             </Button>
-                            <Button className="w-full text-white bg-[#E79057] hover:bg-[#E26F24] hover:ring-1 hover:ring-[#E26F24] hover:ring-offset-1 active:bg-[#D5753D] hover:shadow-lg" onClick={handleSignUp}>
+                            <Button
+                                className="w-full text-white bg-[#E79057] hover:bg-[#E26F24] hover:ring-1 hover:ring-[#E26F24] hover:ring-offset-1 active:bg-[#D5753D] hover:shadow-lg"
+                                onClick={() => handleSignUp(email, password)}
+                            >
                                 회원가입
                             </Button>
                         </div>
