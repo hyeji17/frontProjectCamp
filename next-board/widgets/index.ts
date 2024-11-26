@@ -1,1 +1,1 @@
-export { AsideSection } from "./AsideSection";
+export { AsideSection } from "./aside-section/AsideSection";

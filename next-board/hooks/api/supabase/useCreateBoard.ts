@@ -9,7 +9,11 @@ function useCreateBoard() {
     const { toast } = useToast();
     const [, setTask] = useAtom(taskAtom);
 
-    const createBoard = async (taskId: number, column: string, newValue: any) => {
+    const createBoard = async (
+        taskId: number,
+        column: string,
+        newValue: any
+    ) => {
         try {
             const { data, status, error } = await supabase
                 .from("todos")
@@ -31,7 +35,9 @@ function useCreateBoard() {
                 toast({
                     variant: "destructive",
                     title: "에러가 발생했습니다.",
-                    description: `Supabase 오류: ${error.message || "알 수 없는 오류"}`,
+                    description: `Supabase 오류: ${
+                        error.message || "알 수 없는 오류"
+                    }`,
                 });
             }
         } catch (error) {
