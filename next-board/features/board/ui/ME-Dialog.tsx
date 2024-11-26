@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "@/hooks/use-toast";
 import { useCreateBoard } from "@/hooks/api";
 import { useAtom } from "jotai";
 import { taskAtom } from "@/stores/atoms";
@@ -10,7 +10,6 @@ import {
     Button,
     Checkbox,
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -31,9 +30,8 @@ interface Props {
 
 function MarkdownEditorDialog({ children, board }: Props) {
     const { id } = useParams();
-    const { toast } = useToast();
     const updateBoards = useCreateBoard();
-    const [task, setTask] = useAtom(taskAtom);
+    const [task] = useAtom(taskAtom);
     /** 상태 값 선언 */
     const [isCompleted, setIsCompleted] = useState<boolean>(false);
     const [title, setTitle] = useState<string>("");

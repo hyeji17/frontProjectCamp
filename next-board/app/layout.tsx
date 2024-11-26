@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
 import { Toaster } from "@/shared/ui/toast/toaster";
-import { AsideSection } from "@/widgets";
-import "./styles/globals.css";
-import "./styles/main.scss";
-
-const NOTO_SANS_KR = Noto_Sans_KR({
-    subsets: ["latin"],
-    display: "swap",
-});
+/** 폰트 */
+import { FONT_NOTOSANSKR } from "@/public/assets/fonts";
+/** 스타일 */
+import "@/public/styles/globals.css";
+import "@/public/styles/main.scss";
 
 export const metadata: Metadata = {
-    title: "NEXT.js TODO-BOARD",
-    description: "NEXT.js와 Shadcn UI를 활용한 TODO-BOARD 만들기",
+    title: "TODO-BOARD 만들기",
+    description: "Shadcn UI 및 Supabase를 활용한 나만의 TODO-BOARD 만들기",
 };
 
 export default function RootLayout({
@@ -22,11 +18,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body className={NOTO_SANS_KR.className}>
-                <div className="page">
-                    <AsideSection />
-                    <main className="page__main">{children}</main>
-                </div>
+            <body className={FONT_NOTOSANSKR.className}>
+                {children}
                 <Toaster />
             </body>
         </html>

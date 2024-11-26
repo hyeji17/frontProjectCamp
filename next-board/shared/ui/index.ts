@@ -52,3 +52,4 @@ export {
     ToastClose,
     ToastAction,
 } from "./toast/toast";
+export { Label } from "./label/label";
