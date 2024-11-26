@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import useEmailCheck from "@/hooks/use-email";
 /** UI 컴포넌트 */
 import {
     Button,
@@ -22,6 +23,7 @@ import { Eye, EyeOff } from "@/public/assets/icons";
 function SignUpPage() {
     const supabase = createClient();
     const router = useRouter();
+    const { checkEmail } = useEmailCheck();
     /** 회원가입에 필요한 상태 값 */
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -30,6 +32,33 @@ function SignUpPage() {
     const togglePassword = () => setShowPassword((prevState) => !prevState);
 
     const signUpNewUser = async () => {
+        if (!email || !password) {
+            toast({
+                variant: "destructive",
+                title: "가입되지 않은 데이터(값)가 있습니다.",
+                description: "이메일과 비밀버호는 필수 값입니다.",
+            });
+            return; // 필수 값이 입력되지 않은 경우라면, 추가 작업을 하지 않고 리턴
+        }
+
+        if(!checkEmail(email)){
+            toast({
+                variant: "destructive",
+                title: "올바르지 않은 이메일 양식입니다.",
+                description: "올바른 이메일 양식을 작성해주세요!",
+            });
+            return; // 이메일 형식이 잘못된 경우, 추가 작업을 하지 않고 리턴
+        }
+
+        if (password.length < 8) {
+            toast({
+                variant: "destructive",
+                title: "비밀번호는 최소 8자 이상이어야합니다.",
+                description: "우리의 저오는 소중하니까요! 보안에 신경쓰자구요!",
+            });
+            return; // 비밀번호 길이가 8자 이하일 경우, 추가 작업을 하지 않고 리턴
+        }
+
         try {
             const { data, error } = await supabase.auth.signUp({
                 email: email,
