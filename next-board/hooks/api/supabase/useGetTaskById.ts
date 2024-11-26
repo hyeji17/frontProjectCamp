@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useAtom } from "jotai";
 import { taskAtom } from "@/stores/atoms";
@@ -44,8 +44,6 @@ function useGetTaskById(taskId: number) {
     useEffect(() => {
         if (taskId) getTaskById();
     }, [taskId]);
-
-
 
     return { task, getTaskById };
 }

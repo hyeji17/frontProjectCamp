@@ -77,7 +77,7 @@ function CardBoard({ board }: Props) {
             </div>
             <Separator className="my-3" />
             {/* Add Contents 버튼 영역 */}
-            <MarkdownEditorDialog board = {board}>
+            <MarkdownEditorDialog board={board}>
                 <Button
                     variant={"ghost"}
                     className="font-normal text-[#6D6D6D]"
