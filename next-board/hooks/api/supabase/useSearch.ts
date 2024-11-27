@@ -10,7 +10,7 @@ function useSearch() {
     const search = async (searchTerm: string) => {
         try {
             const { data, status, error } = await supabase
-                .from("tasks")
+                .from("todos")
                 .select("*")
                 .ilike("title", `%${searchTerm}%`);
 

@@ -1,6 +1,8 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useDeleteTask } from "@/hooks/api";
+/** UI 컴포넌트 */
 import {
     AlertDialog,
     AlertDialogAction,
@@ -12,7 +14,6 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/shared/ui";
-import { useDeleteTask } from "@/hooks/api";
 
 interface Props {
     children: React.ReactNode;
@@ -20,9 +21,7 @@ interface Props {
 
 function AlertPopup({ children }: Props) {
     const { id } = useParams();
-
-    /** 전체 삭제 */
-    const handleDeleteTask= useDeleteTask();
+    const handleDeleteTask = useDeleteTask();
 
     return (
         <AlertDialog>

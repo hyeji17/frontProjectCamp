@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { userAtom } from "@/stores/atoms";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import useEmailCheck from "@/hooks/use-email";
 /** UI 컴포넌트 */
+import { FindPasswordPopup } from "@/features";
 import {
     Button,
     Card,
@@ -38,10 +39,10 @@ function LoginPage() {
         if (!email || !password) {
             toast({
                 variant: "destructive",
-                title: "가입되지 않은 데이터(값)가 있습니다.",
-                description: "이메일과 비밀버호는 필수 값입니다.",
+                title: "기입되지 않은 데이터(값)가 있습니다.",
+                description: "이메일과 비밀번호는 필수 값입니다.",
             });
-            return; // 필수 값이 입력되지 않은 경우라면, 추가 작업을 하지 않고 리턴
+            return; // 필수 값이 입력되지 않은 경우라면, 추가 작업은 하지 않고 리턴
         }
 
         if (!checkEmail(email)) {
@@ -72,7 +73,6 @@ function LoginPage() {
                     title: "로그인을 성공하였습니다.",
                     description: "자유롭게 TASK 관리를 해주세요!",
                 });
-
                 console.log(data);
                 router.push("/board"); // 로그인 페이지로 이동
 
@@ -137,12 +137,11 @@ function LoginPage() {
                         <div className="relative grid gap-2">
                             <div className="flex items-center">
                                 <Label htmlFor="password">비밀번호</Label>
-                                <Link
-                                    href={"#"}
-                                    className="ml-auto inline-block text-sm underline"
-                                >
-                                    비밀번호 초기화하기
-                                </Link>
+                                <FindPasswordPopup>
+                                    <p className="ml-auto inline-block text-sm underline cursor-pointer">
+                                        비밀번호를 잊으셨나요?
+                                    </p>
+                                </FindPasswordPopup>
                             </div>
                             <Input
                                 id="password"

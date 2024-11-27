@@ -58,7 +58,7 @@ function BoardDetailPage() {
 
         try {
             const { data, status, error } = await supabase
-                .from("tasks")
+                .from("todos")
                 .update({
                     title: title,
                     start_date: startDate,
