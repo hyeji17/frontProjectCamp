@@ -101,10 +101,10 @@ function LoginPage() {
     };
 
     useEffect(() => {
-        /** 로컬스토리지에 user가 있는 경우, 콘텐츠 페이지로 리다이렉트 */
+        /** 로컬스토리지에 user 데이터 유무 체크 후 리다이렉션 */
         const user = localStorage.getItem("user");
-        if(user) router.push("/board")
-    }, [router])
+        if (user) router.push("/board");
+    }, [router]);
 
     return (
         <div className="page">
