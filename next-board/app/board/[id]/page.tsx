@@ -8,7 +8,7 @@ import { useCreateBoard, useGetTaskById, useGetTasks } from "@/hooks/api";
 import { toast } from "@/hooks/use-toast";
 import { nanoid } from "nanoid";
 /** UI 컴포넌트 */
-import { AlertPopup, CardBoard } from "@/features";
+import {  AlertPopup, CardBoard } from "@/features";
 import { Button, Progress, LabelDatePicker } from "@/shared/ui";
 import { ChevronLeft } from "@/public/assets/icons";
 /** 스타일 */

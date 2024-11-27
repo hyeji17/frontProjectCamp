@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
@@ -73,16 +73,21 @@ function LoginPage() {
                     title: "로그인을 성공하였습니다.",
                     description: "자유롭게 TASK 관리를 해주세요!",
                 });
-                console.log(data);
-                router.push("/board"); // 로그인 페이지로 이동
 
-                // Jotai의 user에 관련된 상태 값을 업데이트
-                setUser({
+                /** 쿠키에 저장할 user 데이터 */
+                const userData = {
                     id: data.user?.id || "",
                     email: data.user?.email || "",
                     phone: data.user?.phone || "",
-                    imgUrl: "/assets/images/profile.png",
-                });
+                    imgUrl: "/assets/images/profile.jpg",
+                };
+                document.cookie = `user=${JSON.stringify(
+                    userData
+                )}; path=/; max-age=3600`; // 1시간 동안 유효
+
+                // Jotai의 user에 관련된 상태 값을 업데이트
+                setUser(userData);
+                router.push("/board"); // 콘텐츠 페이지로 이동
             }
         } catch (error) {
             /** 네트워크 오류나 예기치 않은 에러를 잡기 위해 catch 구문 사용 */
@@ -94,6 +99,12 @@ function LoginPage() {
             });
         }
     };
+
+    useEffect(() => {
+        /** 로컬스토리지에 user가 있는 경우, 콘텐츠 페이지로 리다이렉트 */
+        const user = localStorage.getItem("user");
+        if(user) router.push("/board")
+    }, [router])
 
     return (
         <div className="page">
