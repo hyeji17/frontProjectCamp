@@ -4,7 +4,7 @@ interface Props {
     time: string;
 }
 
-function GetSunTime({ imgUrl, label, time }: Props) {
+function GetSunriseAndSunset({ imgUrl, label, time }: Props) {
     return (
         <div className="w-full flex items-center gap-2">
             <img src={imgUrl} alt="" className="h-14" />
@@ -18,4 +18,4 @@ function GetSunTime({ imgUrl, label, time }: Props) {
     );
 }
 
-export { GetSunTime };
+export { GetSunriseAndSunset };

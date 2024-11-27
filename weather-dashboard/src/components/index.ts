@@ -1,15 +1,16 @@
-/** 공통으로 사용하는 컴포넌트 */
+/** 공통적으로 사용되는 컴포넌트 */
 export { Header } from "./common/header/Header";
 
-// Home 페이지에서 관리하는 컴포넌틑
+/** HOME 페이지에서 관리하는 컴포넌트 */
 export { GetTodayWidget } from "./home/GetTodayWidget";
 export { GetHourlyWidget } from "./home/GetHourlyWidget";
 export { GetKakaoMapWidget } from "./home/GetKakaoMapWidget";
-export { GetSunTime } from "./home/GetSunTime";
-export { GetCardData } from "./home/GetCardData";
 export { GetTodayHighlightsWidget } from "./home/GetTodayHighlightsWidget";
+export { GetDayItem } from "./home/GetDayItem";
+export { HourlyCard } from "./home/GetCardData";
+export { GetWeekWidget } from "./home/GetWeekWidget";
 
-// ui 기초 컴포넌트
+/** UI 기초 컴포넌트 */
 export { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 export { Button, buttonVariants } from "./ui/button";
 export {
@@ -23,3 +24,7 @@ export {
 export { Input } from "./ui/input";
 export { Separator } from "./ui/separator";
 export { SearchBar } from "./ui/search-bar";
+
+/** TEST CODE */
+export { GetSunriseAndSunset } from "./home/GetSunTime";
+export { GetWavesWidget } from "./home/GetWavesWidget";

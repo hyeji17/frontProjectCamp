@@ -1,33 +1,40 @@
-import { Card, CardContent, CardDescription, CardHeader } from "@/components";
+import useFormattedTime from "@/hooks/useFormattedTime";
+import { Card } from "@/components";
+import { HourlyData } from "@/types";
 
 interface Props {
-    label: string;
-    description: string;
-    imgUrl: string;
-    numberData: number;
-    unit: string;
+    data: HourlyData;
 }
 
-function GetCardData({ label, description, imgUrl, numberData, unit }: Props) {
+function HourlyCard({ data }: Props) {
+    const formmatedTime = useFormattedTime(data.time);
+
     return (
-        <Card className="w-full h-fit bg-neutral-50">
-            <CardHeader>
-                <CardDescription className="font-semibold text-neutral-700">
-                    {label}
-                    <span className="text-neutral-400 font-normal m1-1">
-                        {description}
-                    </span>
-                </CardDescription>
-            </CardHeader>
-            <CardContent className="flex items-center justify-between">
-                <img src={imgUrl} alt="" className="h-10 w-10" />
-                <p className="poppins-medium scroll-m-20 text-3xl font-semibold tracking-tight">
-                    {numberData}
-                    <span className="text-lg ml-1">{unit}</span>
-                </p>
-            </CardContent>
+        <Card className="w-24 min-w-24 h-fit flex flex-col items-center pt-[10px] pb-[6px] gap-1 bg-neutral-50">
+            <span className="text-sm">{formmatedTime}</span>
+            {data.condition.icon.includes("day") ? (
+                <img
+                    src={`src/assets/icons/${data.condition.code}d.svg`}
+                    alt=""
+                    className=" h-14 w-14"
+                />
+            ) : (
+                <img
+                    src={`src/assets/icons/${data.condition.code}n.svg`}
+                    alt=""
+                    className=" h-14 w-14"
+                />
+            )}
+            <div className="w-full flex items-start justify-center">
+                <span className="poppins-medium scroll-m-20 text-xl font-medium tracking-tight">
+                    {data.temp_c}
+                </span>
+                <span className="text-[13px] ml-[1px] mt-[1px] font-medium">
+                    &#8451;
+                </span>
+            </div>
         </Card>
     );
 }
 
-export { GetCardData };
+export { HourlyCard };
