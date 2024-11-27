@@ -29,7 +29,7 @@ function FindPasswordPopup({ children }: Props) {
     const handleResetPassword = async () => {
         try {
             await supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: "http://localhost:3000/reset-password",
+                redirectTo: "http://localhost:3000/password-setting",
             });
             toast({
                 title: "비밀번호 초기화 이메일을 전송했습니다.",
